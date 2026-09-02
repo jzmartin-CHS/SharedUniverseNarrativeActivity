@@ -1,87 +1,476 @@
-Part C — Launch the Project: “Story in a Box” (20 min)
-Set up the shared universe.
-Put students into groups of 3–4.
-Each group gets a “box” (or a set of 8–10 prompt slips you pre-make—paper strips).
-Everyone draws:
-A setting
-A character quirk
-An object with meaning
-A conflict
-They must agree on one sentence that becomes their “universe hook”:
-“In [setting], a [character/quirk] must face [conflict] after [object appears].”
-Wrap: Collect the group hooks to post/display (so students feel like they “started something” on Day 1).
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story in a Box — Project Launch</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-amber: #fbbf24;
+            --accent-green: #34d399;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-Day 2: Drafting Day (Fun Constraints) + Peer Warm Feedback (45–90 min)
-Goal
-Turn creativity into an actual draft using playful structure + confidence.
-Part A — Writing Warm-Up: “30-Second Cinematic” (8–10 min)
-Students pick one group-universe hook from the board/poster.
-They write 3 quick bullet images:
-What does it look like?
-What does it sound like?
-What does the main character want right now?
-Part B — Mini Lesson: “Show, Don’t Tell… but Make It Weird” (10 min)
-Teach one small craft target:
-Choose one:
-vivid sensory details
-purposeful dialogue
-a character action that reveals emotion
-Give a 2-sentence model and ask students to annotate it (“What makes this show, not tell?”)
-Part C — Individual Writing Task: “Scene with a Twist” (25–45 min)
-Each student writes a 1–2 page scene connected to their chosen group universe.
-Constraint to make it fun (and easier to start):
-Must include:
-1 setting detail (specific and concrete)
-1 object (from the group draws/box)
-1 dialogue exchange (at least 4 lines total)
-1 sentence that starts with: “Of course,” or “I didn’t mean to…” (fun rule!)
-A twist at the end (something is not what it seemed)
-Part D — Low-Stakes Peer Feedback: “Compliment + Question” (10–15 min)
-Pair students and use a simple form:
-Glow (compliment): “I liked how you…”
-Grow (question): “I’m curious about…”
-Collect the questions; you can respond tomorrow as a class.
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-Day 3: Revise + Share (Conference + Optional Performance) (45–90 min)
-Goal
-Improve writing without making it feel like “serious test prep.”
-Part A — Revision Sprint: “One Target Only” (10 min)
-Give students a checklist, but they choose only one focus:
-Pick one:
-stronger ending (twist or emotional shift)
-clearer character motivation
-more vivid sensory detail
-revise dialogue for realism/purpose
-Students do a “revision sprint” of 10 minutes.
-Part B — Teacher Micro-Conferences (15–25 min)
-While students revise, you conference with 6–8 students total:
-ask: “What are you trying to make the reader feel?”
-identify one actionable next step
-(If you can’t conference everyone, do quick spot-checks and short notes.)
-Part C — Share Day: “Gallery Walk: Sticky Notes” OR “Read-Aloud Choice” (15–25 min)
-Two options depending on your class vibe:
-Option 1: Gallery Walk (low pressure)
-Post excerpts (or students turn in) and students walk with a sticky note prompt:
-“This line made me visualize…”
-“I felt… when…”
-“I wondered…”
-Option 2: Optional Performance
-Students may read a 30–45 second excerpt aloud if they want. Not required.
-Part D — Closure Reflection (5–8 min)
-Students answer one prompt:
-“Today I improved my writing by…”
-“My next writing goal is…”
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
 
-Materials to Prep (quick list)
-Slips for the “Story in a Box”:
-settings (school, coastal town, future city, rural farm, etc.)
-quirk traits (overly literal, collects receipts, can’t lie, hears music in everything)
-objects (compass that points to memories, broken watch that runs backward, key without a door)
-conflicts (a rumor spreads, someone vanishes, a promise is tested, the object “chooses” a person)
-Procedure prompts for Day 1
-A simple peer feedback sheet (Glow/Grow)
+        /* Slide Deck Container */
+        .deck-container {
+            flex: 1;
+            position: relative;
+            max-width: 1100px;
+            width: 90%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-Why this works for a “catch-up” class
-Students collaborate immediately but still write independently.
-The shared universe reduces “blank page stress.”
-Revision + feedback helps you quickly gauge skill levels and personality.
+        .slide {
+            display: none;
+            width: 100%;
+            height: 80vh;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Headers & Typography */
+        .slide-tag {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 2.8rem; color: #fff; margin-bottom: 10px; }
+        h2 { font-size: 2.2rem; color: #fff; margin-bottom: 15px; }
+        h3 { font-size: 1.4rem; color: var(--accent-amber); margin-bottom: 10px; }
+        p, li { font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; }
+
+        .content-area {
+            flex: 1;
+            margin-top: 15px;
+        }
+
+        /* Lists & Columns */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        ul.styled-list {
+            list-style: none;
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        ul.styled-list li::before {
+            content: "➔";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Generator Box (Slide 3) */
+        .generator-card {
+            background: #0f172a;
+            border: 2px dashed var(--accent-blue);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .prompt-box {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .prompt-box h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .prompt-box p {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .hook-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid var(--accent-amber);
+            border-radius: 8px;
+            padding: 15px;
+            color: var(--accent-amber);
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn-gen {
+            background: var(--accent-blue);
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .btn-gen:hover {
+            background: #7dd3fc;
+            transform: scale(1.02);
+        }
+
+        .btn-gen:active { transform: scale(0.98); }
+
+        /* Navigation Bar */
+        .nav-bar {
+            height: 60px;
+            background: #0f172a;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover { background: #334155; }
+        .slide-counter { color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="deck-container">
+
+    <div class="slide active">
+        <div>
+            <span class="slide-tag">Day 1 • Creative Writing</span>
+            <h1>Story in a Box Project</h1>
+            <p>Collaborative Worldbuilding & Short Story Challenge</p>
+        </div>
+        <div class="content-area">
+            <ul class="styled-list">
+                <li><strong>Goal:</strong> Build a shared narrative universe in teams of 3–4.</li>
+                <li><strong>Day 1:</strong> Randomize universe elements & write your group hook.</li>
+                <li><strong>Day 2:</strong> Write an individual scene with fun constraints.</li>
+                <li><strong>Day 3:</strong> Revise, micro-conference, and share excerpts.</li>
+            </ul>
+        </div>
+        <p style="font-size: 0.9rem;">Use ⬅️/➡️ arrow keys or the controls below to navigate.</p>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 1 • Shared Universe Launch</span>
+            <h2>Group Formation & Rules</h2>
+        </div>
+        <div class="content-area grid-2">
+            <div>
+                <h3>1. Team Up</h3>
+                <p>Gather into groups of 3 or 4. Assign one driver to generate your prompt elements on the next slide.</p>
+            </div>
+            <div>
+                <h3>2. The Challenge</h3>
+                <p>You cannot swap prompts individually! You must accept the random elements drawn from the digital box and build around them together.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 1 • Interactive Launch</span>
+            <h2>Digital "Story in a Box" Generator</h2>
+        </div>
+        <div class="content-area">
+            <div class="generator-card">
+                <button class="btn-gen" onclick="drawStoryBox()">🎲 Draw Random Universe</button>
+                
+                <div class="prompt-grid">
+                    <div class="prompt-box">
+                        <h4>Setting</h4>
+                        <p id="disp-setting">Click generate button above...</p>
+                    </div>
+                    <div class="prompt-box">
+                        <h4>Character Quirk</h4>
+                        <p id="disp-quirk">Click generate button above...</p>
+                    </div>
+                    <div class="prompt-box">
+                        <h4>Object with Meaning</h4>
+                        <p id="disp-object">Click generate button above...</p>
+                    </div>
+                    <div class="prompt-box">
+                        <h4>Conflict</h4>
+                        <p id="disp-conflict">Click generate button above...</p>
+                    </div>
+                </div>
+
+                <div class="hook-box" id="disp-hook">
+                    “In [Setting], a character who [Quirk] must face [Conflict] after [Object] appears.”
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 1 • Wrap Up</span>
+            <h2>Lock In Your Universe Hook</h2>
+        </div>
+        <div class="content-area">
+            <p style="margin-bottom: 20px;">Collaborate with your team to finalize one complete, cohesive sentence based on your generated items:</p>
+            <div class="hook-box" style="margin-bottom: 25px; text-align: left;">
+                “In <u>[Setting]</u>, a character who <u>[Quirk]</u> must face <u>[Conflict]</u> after <u>[Object]</u> appears.”
+            </div>
+            <ul class="styled-list">
+                <li>Submit your finalized sentence to the teacher board before class ends.</li>
+                <li>Everyone in your group will write their own unique scene inside this same universe tomorrow!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 2 • Drafting Day</span>
+            <h2>Warm-Up & Mini-Lesson</h2>
+        </div>
+        <div class="content-area grid-2">
+            <div>
+                <h3>Warm-Up: 30-Second Cinematic</h3>
+                <ul class="styled-list">
+                    <li>What does the scene <strong>look</strong> like?</li>
+                    <li>What does it <strong>sound</strong> like?</li>
+                    <li>What does the main character <strong>want</strong> right now?</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Mini-Lesson: Show, Don't Tell</h3>
+                <p>Instead of naming an emotion, describe the physical action or concrete detail that reveals it.</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; margin-top: 10px;">
+                    <p style="font-style: italic; font-size: 1rem;">“Her fingers shredded the edge of the paper napkin into quiet confetti under the table.”</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 2 • Individual Writing Task</span>
+            <h2>Scene with a Twist Constraints</h2>
+        </div>
+        <div class="content-area">
+            <p>Write a 1–2 page scene connected to your group's universe. You must include:</p>
+            <ul class="styled-list" style="margin-top: 15px;">
+                <li><strong>1 Concrete Setting Detail</strong></li>
+                <li><strong>1 Drawn Object</strong> from your group box</li>
+                <li><strong>1 Dialogue Exchange</strong> (minimum 4 lines)</li>
+                <li><strong>1 Required Sentence Starter:</strong> Begins with <em>“Of course,”</em> or <em>“I didn’t mean to…”</em></li>
+                <li><strong>A Twist Ending:</strong> Something is not what it first seemed!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 2 • Peer Feedback</span>
+            <h2>Glow & Grow Exchange</h2>
+        </div>
+        <div class="content-area">
+            <p style="margin-bottom: 20px;">Swap drafts with a partner and complete the short feedback form:</p>
+            <div style="background: rgba(52, 211, 153, 0.1); border-left: 4px solid var(--accent-green); padding: 15px; margin-bottom: 15px; border-radius: 4px;">
+                <h4 style="color: var(--accent-green); margin-bottom: 5px;">🌟 Glow (Compliment)</h4>
+                <p>“I really liked how you…”</p>
+            </div>
+            <div style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-blue); padding: 15px; border-radius: 4px;">
+                <h4 style="color: var(--accent-blue); margin-bottom: 5px;">🌱 Grow (Question)</h4>
+                <p>“I was curious about…”</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div>
+            <span class="slide-tag">Day 3 • Revision & Showcase</span>
+            <h2>10-Minute Revision Sprint & Reflection</h2>
+        </div>
+        <div class="content-area grid-2">
+            <div>
+                <h3>Select ONE Revision Focus</h3>
+                <ul class="styled-list">
+                    <li>Stronger twist / emotional shift ending</li>
+                    <li>Clearer character motivation</li>
+                    <li>More vivid sensory details</li>
+                    <li>Realistic dialogue adjustments</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Exit Reflection</h3>
+                <p>Answer one prompt on your exit card:</p>
+                <p style="color: var(--accent-amber); margin-top: 10px;">• “Today I improved my writing by…”</p>
+                <p style="color: var(--accent-amber); margin-top: 5px;">• “My next writing goal is…”</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="nav-bar">
+    <button class="nav-btn" onclick="prevSlide()">⬅️ Previous</button>
+    <div class="slide-counter" id="counter-display">Slide 1 of 8</div>
+    <button class="nav-btn" onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<script>
+    // Slide Navigation Logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const counterDisplay = document.getElementById('counter-display');
+
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+        counterDisplay.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            updateSlides();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlides();
+        }
+    }
+
+    // Keyboard Arrow Controls
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Random Prompt Arrays
+    const settings = [
+        "an overcrowded high school cafeteria",
+        "a foggy coastal fishing town",
+        "a decaying neon-lit future city",
+        "a quiet rural farm during drought",
+        "an arctic research station",
+        "an abandoned theme park after dark"
+    ];
+
+    const quirks = [
+        "is overly literal about everything",
+        "obsessively collects old discarded receipts",
+        "is physically incapable of telling a lie",
+        "hears faint background music when tense",
+        "refuses to make direct eye contact",
+        "speaks exclusively in dramatic metaphors"
+    ];
+
+    const objects = [
+        "a brass compass pointing to memories",
+        "a broken watch running steadily backward",
+        "an old key without any matching door",
+        "an unmarked cassette tape labeled 'DO NOT PLAY'",
+        "a glowing glass marble that hums softly",
+        "a notebook containing tomorrow's date entries"
+    ];
+
+    const conflicts = [
+        "a dangerous rumor begins spreading rapidly",
+        "a close friend vanishes without a trace",
+        "an old promise is suddenly put to the test",
+        "the object unexpectedly 'chooses' a person",
+        "a strict curfew rule gets broken",
+        "a long-held secret identity is threatened"
+    ];
+
+    // Generator Function
+    function drawStoryBox() {
+        const s = settings[Math.floor(Math.random() * settings.length)];
+        const q = quirks[Math.floor(Math.random() * quirks.length)];
+        const o = objects[Math.floor(Math.random() * objects.length)];
+        const c = conflicts[Math.floor(Math.random() * conflicts.length)];
+
+        document.getElementById('disp-setting').textContent = s;
+        document.getElementById('disp-quirk').textContent = q;
+        document.getElementById('disp-object').textContent = o;
+        document.getElementById('disp-conflict').textContent = c;
+
+        document.getElementById('disp-hook').textContent = 
+            `“In ${s}, a character who ${q} must face ${c} after ${o} appears.”`;
+    }
+</script>
+
+</body>
+</html>
